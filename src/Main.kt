@@ -10,7 +10,6 @@ class ChuckNorrisCipherEncoder {
                     println("Bye!")
                     break
                 }
-
                 else -> println("There is no '$choice' operation")
             }
         }
@@ -28,7 +27,6 @@ class ChuckNorrisCipherEncoder {
         }
 
         val binaryStr = StringBuilder()
-
         for (i in list.indices step 2) {
             if (list[i] == "0" || list[i] == "00") {
                 when {
@@ -63,18 +61,17 @@ class ChuckNorrisCipherEncoder {
             val binaryCh = ch.code.toString(2).padStart(7, '0')
             binaryString.append(binaryCh)
         }
-        val regex = Regex("(0+|1+)")
-        val matches = regex.findAll(binaryString)
 
+        val matches = Regex("(0+|1+)").findAll(binaryString)
         val encodedString = StringBuilder()
         for (match in matches) {
-            val group = match.value
-            if (group.startsWith("0")) {
+            val matchValue = match.value
+            if (matchValue.startsWith("0")) {
                 encodedString.append("00").append(" ")
             } else {
                 encodedString.append("0").append(" ")
             }
-            encodedString.append("0".repeat(group.length)).append(" ")
+            encodedString.append("0".repeat(matchValue.length)).append(" ")
         }
 
         println("Encoded string:")
